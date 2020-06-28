@@ -4,11 +4,17 @@
 
 #end
 
-all_odd = [1,3].all? do |number|
-  number.odd? # Will evaluate to true for 1, true for 3
-end #=> true
-all_odd #=> true
-
-[4, 8, 9, 984].any?{|i| i < 9842}
-
-[1,2,3].detect{|i| i.odd?} #=> 1
+def my_all?(collection)
+  i = 0
+  block_return_values = []
+  while i < collection.length
+    block_return_values << yield(collection[i])
+    i = i + 1
+  end
+ 
+  if block_return_values.include?(false)
+    false
+  else
+    true
+  end
+end
